@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ujn.library.dao.BorrowingRecordMapper">
+  <resultMap id="BaseResultMap" type="com.ujn.library.entity.BorrowingRecord">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="book_id" jdbcType="VARCHAR" property="bookId" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+
+  <select id="getBookIdsByUserId" parameterType="String" resultType="String">
+    select book_id from borrowing_record where user_id=#{user_id} and state=0
+  </select>
+
+  <insert id="borrowBook" parameterType="com.ujn.library.entity.BorrowingRecord">
+    insert into borrowing_record (id,user_id,book_id,state)
+    values (#{id},#{userId},#{bookId},#{state})
+  </insert>
+
+  <select id="count" parameterType="String" resultType="Integer">
+    select count(*) from borrowing_record where user_id=#{user_id}
+  </select>
+
+  <select id="onCount" parameterType="String" resultType="Integer">
+    select count(*) from borrowing_record where state=0 and user_id=#{user_id}
+  </select>
+
+  <select id="getBorrowBookIds" parameterType="String" resultType="String">
+    select book_id from borrowing_record where user_id=#{user_id} order by createtime desc limit ${start},${pageSize}
+  </select>
+
+
+</mapper>

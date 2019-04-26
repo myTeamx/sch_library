@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>图书借阅系统</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" th:href="@{/js/layui/css/layui.css}" media="all">
+	</head>
+	<body>
+		<div class="layui-layout-admin">
+			<!-- 头部导航栏 -->
+			<div class="layui-header">
+				<ul class="layui-nav layui-bg-green" lay-filter="">
+					<li class="layui-nav-item layui-this"><a href="javascript:void(0)">图书借阅系统</a></li>
+					<li class="layui-nav-item"><a href="javascript:void(0)">我的借阅<span class="layui-badge" id="onBorrowBookCount">9</span></a></li>
+					<li class="layui-nav-item">
+						<a href="javascript:void(0)">其它功能</a>
+						<dl class="layui-nav-child">
+							<dd><a href="javascript:void(0)">借阅历史</a></dd>
+							<dd><a href="javascript:void(0)">留言管理(暂未开放)</a></dd>
+							<dd><a href="javascript:void(0)">我的好友(暂未开放)</a></dd>
+						</dl>
+					</li>
+				</ul>
+				<ul class="layui-nav layui-layout-right" lay-filter="">
+					<li class="layui-nav-item" style="width: 100px">
+						<a style="font-size: 15px" href="javascript:void(0)" th:text="${session.username}"><img src="http://m.zhengjinfan.cn/images/0.jpg" class="layui-nav-img"></a>
+						<dl class="layui-nav-child">
+							<dd><a href="javascript:void(0)">基本资料</a></dd>
+							<dd><a href="../login/logout.action">安全退出</a></dd>
+						</dl>
+					</li>
+				</ul>
+			</div>
+			
+			<!-- 中间内容区 -->
+			<div id="container" style="padding: 1.25rem; background-color: #F2F2F2;">
+				<div class="layui-row layui-col-space20">
+					<!-- 左侧 -->
+					<div class="layui-col-md2">
+						<div class="layui-card layui-bg-green" style="border-radius: 0.625rem; padding: 1.25rem;">
+							<div class="layui-card-header" style="padding: 0; height: 5.625rem;">
+								<a href=""><img th:src="@{/img/index/头像.png}" class="layui-nav-img" style="width: 3.125rem; height: 3.125rem;"></a>
+								<span style="color: white; font-size: 0.9375rem; position: relative; top: 10px; letter-spacing: 0.125rem;">
+									借书<span style="font-size: 1.875rem; letter-spacing: 0.125rem;" id="borrowBookTimes">XX</span>次
+								</span>
+								<!--<img th:src="@{/img/index/bookmark_red.png}" style="width: 3.125rem; height: 5.3125rem; position: relative; top: -1.5625rem; left: 1.875rem;" />-->
+							</div>
+							<div class="layui-card-body" style="padding: 0.625rem 0;">
+								<div>借阅记录</div>
+								<div id="borrowing_records_top3">
+									<!--<div class="layui-card layui-anim layui-anim-upbit" style="padding: 0.3125rem; background-color: #F2F2F2; border-radius: 0.625rem; color: black;">-->
+										<!--<div class="layui-card-header">书名1</div>-->
+										<!--<div class="layui-card-body" style="height: 1.25rem;">-->
+											<!--<span style="float: left;">作者1</span>-->
+											<!--<span style="float: right;">2019-04-18</span>-->
+										<!--</div>-->
+									<!--</div>-->
+									<!--<div class="layui-card layui-anim layui-anim-upbit" style="padding: 0.3125rem; background-color: #F2F2F2; border-radius: 0.625rem; color: black;">-->
+										<!--<div class="layui-card-header">书名2</div>-->
+										<!--<div class="layui-card-body" style="height: 1.25rem;">-->
+											<!--<span style="float: left;">作者2</span>-->
+											<!--<span style="float: right;">2019-04-18</span>-->
+										<!--</div>-->
+									<!--</div>-->
+									<!--<div class="layui-card layui-anim layui-anim-upbit" style="padding: 0.3125rem; background-color: #F2F2F2; border-radius: 0.625rem; color: black;">-->
+										<!--<div class="layui-card-header">书名3</div>-->
+										<!--<div class="layui-card-body" style="height: 1.25rem;">-->
+											<!--<span style="float: left;">作者3</span>-->
+											<!--<span style="float: right;">2019-04-18</span>-->
+										<!--</div>-->
+									<!--</div>-->
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- 中间 -->
+					<div class="layui-col-md8" id="body_center">
+						<div class="layui-card" style="border-radius: 0.625rem;">
+							<div class="layui-card-body">
+								<!--<iframe scrolling="auto" frameborder="0" th:src="@{./book_show.html}" style="width:100%;height:50rem;"></iframe>-->
+							</div>
+						</div>
+					</div>
+					
+					<!-- 右侧推荐 -->
+					<div class="layui-col-md2">
+						<div class="layui-card" style="border-radius: 0.625rem;">
+							<div class="layui-card-header">猜你喜欢</div>
+							<div class="layui-card-body">
+								
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+
+		<input id="username" style="display: none" th:value="${session.username}">
+		
+		<script th:src="@{/js/layui/layui.all.js}"></script>
+		<script th:src="@{/js/layui/jquery.js}"></script>
+		<script>
+			layui.use('element', function(){
+				var element = layui.element;
+				var str = '<iframe scrolling="auto" frameborder="0" src="../book_show.action" style="width:100%;height:50rem;"></iframe>';
+			  	$('#body_center div[class="layui-card-body"]').html(str);
+			  	var username = $('#username').val();
+				$.ajax({
+					type: 'POST',
+					url: '../borrow/borrowBookTimes.action',
+					data: {username: username},
+					success: function (count) {
+						$('#borrowBookTimes').html(count);
+					}
+				});
+				$.ajax({
+					type: 'POST',
+					url: '../borrow/onBorrowBookCount.action',
+					data: {username: username},
+					success: function (count) {
+						$('#onBorrowBookCount').html(count);
+					}
+				});
+				$.ajax({
+					type: 'POST',
+					url: '../borrow/getBorrowBooksTop3.action',
+					data: {curr: 1, limit: 3, username: username},
+					success: function (books) {
+						var str = '';
+						$.each(books, function (index, book) {
+							str += '<div class="layui-card layui-anim layui-anim-upbit" style="padding: 0.3125rem; background-color: #F2F2F2; border-radius: 0.625rem; color: black;">' +
+									'<div class="layui-card-header layui-elip">'+book.bookName+'</div>' +
+									'<div class="layui-card-body" style="height: 1.25rem;">' +
+									'<div class="layui-elip" style="float: left; max-width: 40%">'+book.author+'</div>' +
+									'<div class="layui-elip" style="float: right;">'+book.createtime+'</div>' +
+									'</div>' +
+									'</div>';
+						});
+						$('#borrowing_records_top3').html(str);
+					}
+				});
+			});
+		</script>
+		
+	</body>
+</html>

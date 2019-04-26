@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>登录</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" th:href="@{/js/layui/css/layui.css}" media="all">
+	</head>
+	<body>
+		<div class="layui-card" style="text-align: center;">
+			<div class="layui-card-header">登录</div>
+			<div class="layui-card-body">
+				<form class="layui-form">
+					<div class="layui-form-item">
+						<label class="layui-form-label">用户名</label>
+						<div class="layui-input-block">
+							<input type="text" name="name" required  placeholder="请输入用户名" class="layui-input" lay-verify="required">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">密码</label>
+						<div class="layui-input-block">
+							<input type="password" name="password" required placeholder="请输入密码" class="layui-input" lay-verify="required">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<div class="layui-input-block">
+							<button class="layui-btn" lay-submit lay-filter="loginBtn">登录</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<input id="username" th:value="${session.username}" style="display: none">
+		
+		<script th:src="@{/js/layui/layui.all.js}"></script>
+		<script th:src="@{/js/layui/jquery.js}"></script>
+		<script>
+			// 实现自动登录
+			$(function () {
+				var username = $('#username').val();
+				if (username != '') {
+					window.location.replace('/login/saveName.action');
+				}
+			});
+		</script>
+		<script>
+			layui.use('form', function(){
+				var form = layui.form;
+				//监听提交
+				form.on('submit(loginBtn)', function(data){
+					var user = data.field;
+					$.ajax({
+						type: 'POST',
+						url: '/login/login.action',
+						data: user,
+						success: function (msg) {
+							// 登录成功
+							if (msg == 'yes') {
+								window.location.replace('/login/saveName.action');
+							} else { // 登录失败
+								layer.msg(msg);
+							}
+						}
+					});
+					return false;
+				});
+			});
+		</script>
+		
+	</body>
+</html>
