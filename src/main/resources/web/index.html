@@ -12,8 +12,8 @@
 			<!-- 头部导航栏 -->
 			<div class="layui-header">
 				<ul class="layui-nav layui-bg-green" lay-filter="">
-					<li class="layui-nav-item layui-this"><a href="javascript:void(0)">图书借阅系统</a></li>
-					<li class="layui-nav-item"><a href="javascript:void(0)">我的借阅<span class="layui-badge" id="onBorrowBookCount">9</span></a></li>
+					<li class="layui-nav-item layui-this"><a id="first" href="javascript:void(0)">图书借阅系统</a></li>
+					<li class="layui-nav-item"><a id="myBorrows" href="javascript:void(0)">我的借阅<span class="layui-badge" id="onBorrowBookCount">0</span></a></li>
 					<li class="layui-nav-item">
 						<a href="javascript:void(0)">其它功能</a>
 						<dl class="layui-nav-child">
@@ -145,6 +145,17 @@
 						$('#borrowing_records_top3').html(str);
 					}
 				});
+
+				$('#first').click(function () {
+					var str = '<iframe scrolling="auto" frameborder="0" src="../book_show.action" style="width:100%;height:50rem;"></iframe>';
+					$('#body_center div[class="layui-card-body"]').html(str);
+				});
+
+				$('#myBorrows').click(function () {
+					var str = '<iframe scrolling="auto" frameborder="0" src="../my_borrows.action" style="width:100%;height:50rem;"></iframe>';
+					$('#body_center div[class="layui-card-body"]').html(str);
+				});
+
 			});
 		</script>
 		

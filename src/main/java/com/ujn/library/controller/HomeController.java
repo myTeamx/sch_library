@@ -17,4 +17,9 @@ public class HomeController {
         return "/book_show";
     }
 
+    @RequestMapping(value = "/my_borrows.action")
+    public String myBorrows() throws Exception {
+        return "/my_borrows";
+    }
+
 }
