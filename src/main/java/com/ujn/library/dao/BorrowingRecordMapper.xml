@@ -9,14 +9,33 @@
     <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
   </resultMap>
 
+  <resultMap id="BookBaseResultMap" type="com.ujn.library.entity.Book" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="book_name" property="bookName" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="press" property="press" jdbcType="VARCHAR" />
+    <result column="category" property="category" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
   <select id="getBookIdsByUserId" parameterType="String" resultType="String">
     select book_id from borrowing_record where user_id=#{user_id} and state=0
+  </select>
+
+  <select id="getBooksByUserId" parameterType="String" resultMap="BookBaseResultMap">
+    select b.* from book b right join
+    (select book_id from borrowing_record where user_id=#{user_id} and state=0) bid
+    on b.id=bid.book_id order by createtime limit ${start},${pageSize}
   </select>
 
   <insert id="borrowBook" parameterType="com.ujn.library.entity.BorrowingRecord">
     insert into borrowing_record (id,user_id,book_id,state)
     values (#{id},#{userId},#{bookId},#{state})
   </insert>
+
+  <update id="backBook" parameterType="com.ujn.library.entity.BorrowingRecord">
+    update borrowing_record set state=1 where user_id=#{userId} and book_id=#{bookId}
+  </update>
 
   <select id="count" parameterType="String" resultType="Integer">
     select count(*) from borrowing_record where user_id=#{user_id}

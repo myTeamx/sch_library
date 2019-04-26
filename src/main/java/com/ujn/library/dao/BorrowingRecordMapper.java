@@ -1,5 +1,6 @@
 package com.ujn.library.dao;
 
+import com.ujn.library.entity.Book;
 import com.ujn.library.entity.BorrowingRecord;
 import org.apache.ibatis.annotations.Param;
 
@@ -9,7 +10,11 @@ public interface BorrowingRecordMapper {
 
     List<String> getBookIdsByUserId(String user_id) throws Exception;
 
+    List<Book> getBooksByUserId(String user_id, int start, int pageSize) throws Exception;
+
     void borrowBook(BorrowingRecord borrowingRecord) throws Exception;
+
+    void backBook(BorrowingRecord borrowingRecord) throws Exception;
 
     int count(String user_id) throws Exception;
 

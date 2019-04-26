@@ -30,6 +30,15 @@ public class BorrowingRecordServiceImpl implements BorrowingRecordService {
     }
 
     @Override
+    public List<Book> getBooksByUserName(String username, String curr, String limit) throws Exception {
+        String user_id = userMapper.getIdByName(username);
+        int index = Integer.valueOf(curr);
+        int pageSize = Integer.valueOf(limit);
+        int start = (index - 1) * pageSize;
+        return borrowingRecordMapper.getBooksByUserId(user_id, start, pageSize);
+    }
+
+    @Override
     public void borrowBook(String username, String bookId) throws Exception {
         String userId = userMapper.getIdByName(username);
         BorrowingRecord borrowingRecord = new BorrowingRecord();
@@ -38,6 +47,15 @@ public class BorrowingRecordServiceImpl implements BorrowingRecordService {
         borrowingRecord.setBookId(bookId);
         borrowingRecord.setState(new Byte("0"));
         borrowingRecordMapper.borrowBook(borrowingRecord);
+    }
+
+    @Override
+    public void backBook(String username, String bookId) throws Exception {
+        String userId = userMapper.getIdByName(username);
+        BorrowingRecord borrowingRecord = new BorrowingRecord();
+        borrowingRecord.setUserId(userId);
+        borrowingRecord.setBookId(bookId);
+        borrowingRecordMapper.backBook(borrowingRecord);
     }
 
     @Override

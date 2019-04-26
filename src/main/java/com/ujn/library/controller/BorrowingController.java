@@ -24,9 +24,22 @@ public class BorrowingController {
     }
 
     @ResponseBody
+    @PostMapping(value = "/getBooksByUserName.action")
+    public List<Book> getBooksByUserName(String username, String curr, String limit) throws Exception {
+        List<Book> books = borrowingRecordService.getBooksByUserName(username, curr, limit);
+        return books;
+    }
+
+    @ResponseBody
     @PostMapping(value = "/borrowBook.action")
     public void borrowBook(String username, String bookId) throws Exception {
         borrowingRecordService.borrowBook(username, bookId);
+    }
+
+    @ResponseBody
+    @PostMapping(value = "/backBook.action")
+    public void backBook(String username, String bookId) throws Exception {
+        borrowingRecordService.backBook(username, bookId);
     }
 
     /**
@@ -51,5 +64,6 @@ public class BorrowingController {
     public List<Book> getBorrowBooksTop3(String curr, String limit, String username) throws Exception {
         return borrowingRecordService.getBorrowBooks(curr, limit, username);
     }
+
 
 }

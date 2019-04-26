@@ -25,7 +25,9 @@
     </form>
 
     <!-- 每本书 -->
-    <div></div>
+    <div>
+
+    </div>
 
 </div>
 <div class="layui-row" style="padding: 1.25rem 6.25rem;">
@@ -41,7 +43,7 @@
     var username = $('#username').val();
     // 定义成全局变量，当借阅被点击时，向数组中加入id，并且发送ajax请求
     // 下次刷新，数组中带有全部的bookIds
-    var bookIds = '';
+    // var bookIds = '';
 
     // // 界面增加书籍借阅次数
     // function addBorrowBookTimes() {
@@ -50,46 +52,46 @@
     //     borrowBookTimesObj.html(parseInt(count) + 1);
     // }
     //
-    // // 界面增加书籍在借次数
-    // function addOnBorrowBookCount() {
-    //     var onBorrowBookCountObj = $('#onBorrowBookCount', window.parent.document);
-    //     var count = onBorrowBookCountObj.html();
-    //     onBorrowBookCountObj.html(parseInt(count) + 1);
-    // }
+    // 界面减少书籍在借次数
+    function reduceOnBorrowBookCount() {
+        var onBorrowBookCountObj = $('#onBorrowBookCount', window.parent.document);
+        var count = onBorrowBookCountObj.html();
+        onBorrowBookCountObj.html(parseInt(count) - 1);
+    }
 
-    // // 点击借阅，借阅书籍
-    // function borrowBook(index) {
-    //     $('#borrowed'+index).removeClass("noShow");
-    //     $('#borrowed'+index).addClass("show");
-    //     $('#borrow'+index).addClass("noShow");
-    //     var bookId = $('#borrowed'+index+'>input').val();
-    //     bookIds.push(bookId);
-    //     addBorrowBookTimes();
-    //     addOnBorrowBookCount();
-    //     $.ajax({
-    //         type: 'POST',
-    //         url: './borrow/borrowBook.action?username='+username+'&bookId='+bookId,
-    //         success: function () {
-    //             layer.msg('借阅成功');
-    //         }
-    //     });
-    // }
+    // 点击归还，归还书籍
+    function backBook(index) {
+        var bookId = $('#borrowed'+index+'>input').val();
+        // 已归还，隐藏
+        $('#bookContainer'+index).css('display', 'none');
+        reduceOnBorrowBookCount();
+        $.ajax({
+            type: 'POST',
+            url: './borrow/backBook.action?username='+username+'&bookId='+bookId,
+            success: function () {
+                layer.msg('归还成功');
+            }
+        });
+    }
 
-    $.ajax({
-        type: 'POST',
-        url: './borrow/getBookIdsByUserName.action?username='+username,
-        success: function (myBookIds) {
-            bookIds = myBookIds;
-            page();
-        }
-    });
+    // $.ajax({
+    //     type: 'POST',
+    //     url: './borrow/getBookIdsByUserName.action?username='+username,
+    //     success: function (myBookIds) {
+    //         bookIds = myBookIds;
+    //         page();
+    //     }
+    // });
+
+    page();
 
     function page() {
         $.ajax({
             type: 'POST',
-            url: './book/count.action',
+            url: './borrow/onBorrowBookCount.action',
+            data: {username: username},
             success: function (data) {
-                pageChange(data)
+                pageChange(data);
             }
         });
     }
@@ -109,63 +111,31 @@
                     if (obj != undefined) {
                         $.ajax({
                             type: 'POST',
-                            url: './book/show.action',
+                            url: './borrow/getBooksByUserName.action?username='+username,
                             data: obj,
                             success: function (booksJson) {
                                 var books = eval(booksJson);
                                 $.each(books, function (index, book) {
-                                    var isBorrowed = false;
-                                    if (bookIds.length != 0) {
-                                        if ($.inArray(book.id, bookIds) >= 0) {
-                                            isBorrowed = true;
-                                        }
-                                    }
-                                    if (isBorrowed) { // 已借阅这本书
-                                        str +=
-                                            '<div class="layui-card layui-bg-green layui-anim layui-anim-upbit" style="border-radius: 0.625rem; height: 100px;">' +
-                                            '<div class="layui-card-body">' +
-                                            '<div style="float: left;">' +
-                                            '<div style="font-size: 1.25rem; margin-bottom: 0.625rem;">' +
-                                            '<span>《</span>'+book.bookName+'<span>》</span>' +
-                                            '</div>' +
-                                            '<div style="margin-left: 0.625rem;">'+book.category+'</div>' +
-                                            '<div style="margin-left: 0.625rem;">' +
-                                            '<span>'+book.author+'</span>/<span>'+book.press+'</span>' +
-                                            '</div>' +
-                                            '</div>' +
-                                            '<div style="float: right;">' +
-                                            '<div style="margin-bottom: 1.25rem; height: 24px"><div id="borrowed'+index+'" class="show">' +
-                                            '<input style="display: none" value="'+book.id+'">' +
-                                            '<i class="layui-icon layui-icon-ok-circle" style="font-size: 0.9375rem; color: black;"></i>' +
-                                            '已借阅</div></div>' +
-                                            '<div id="borrow'+index+'" style="display: none"><button onclick="borrowBook('+index+')" class="layui-btn layui-btn-sm layui-btn-warm">借阅</button></div>' +
-                                            '</div>' +
-                                            '</div>' +
-                                            '</div>';
-                                    } else { // 未借阅这本书
-                                        str +=
-                                            '<div class="layui-card layui-bg-green layui-anim layui-anim-upbit" style="border-radius: 0.625rem; height: 100px;">' +
-                                            '<div class="layui-card-body">' +
-                                            '<div style="float: left;">' +
-                                            '<div style="font-size: 1.25rem; margin-bottom: 0.625rem;">' +
-                                            '<span>《</span>'+book.bookName+'<span>》</span>' +
-                                            '</div>' +
-                                            '<div style="margin-left: 0.625rem;">'+book.category+'</div>' +
-                                            '<div style="margin-left: 0.625rem;">' +
-                                            '<span>'+book.author+'</span>/<span>'+book.press+'</span>' +
-                                            '</div>' +
-                                            '</div>' +
-                                            '<div style="float: right;">' +
-                                            '<div style="margin-bottom: 1.25rem; height: 24px"><div id="borrowed'+index+'" class="noShow">' +
-                                            '<input style="display: none" value="'+book.id+'">' +
-                                            '<i class="layui-icon layui-icon-ok-circle" style="font-size: 0.9375rem; color: black;"></i>' +
-                                            '已借阅</div></div>' +
-                                            '<div id="borrow'+index+'"><button onclick="borrowBook('+index+')" class="layui-btn layui-btn-sm layui-btn-warm">借阅</button></div>' +
-                                            '</div>' +
-                                            '</div>' +
-                                            '</div>';
-                                    }
-
+                                    str +=
+                                        '<div id="bookContainer'+index+'" class="layui-card layui-bg-green layui-anim layui-anim-upbit" style="border-radius: 0.625rem; height: 100px;">' +
+                                        '<div class="layui-card-body">' +
+                                        '<div style="float: left;">' +
+                                        '<div style="font-size: 1.25rem; margin-bottom: 0.625rem;">' +
+                                        '<span>《</span>'+book.bookName+'<span>》</span>' +
+                                        '</div>' +
+                                        '<div style="margin-left: 0.625rem;">'+book.category+'</div>' +
+                                        '<div style="margin-left: 0.625rem;">' +
+                                        '<span>'+book.author+'</span>/<span>'+book.press+'</span>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '<div style="float: right;">' +
+                                        '<div style="margin-bottom: 1.25rem; height: 24px"><div id="borrowed'+index+'" class="show">' +
+                                        '<input style="display: none" value="'+book.id+'">' +
+                                        '</div></div>' +
+                                        '<div id="borrow'+index+'"><button onclick="backBook('+index+')" class="layui-btn layui-btn-sm layui-btn-warm">归还</button></div>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</div>';
                                 });
                                 $('#books > div').html(str);
 

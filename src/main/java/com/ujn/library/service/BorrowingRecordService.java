@@ -6,9 +6,13 @@ import java.util.List;
 
 public interface BorrowingRecordService {
 
-    List<String> getBookIdsByUserName(String user_id) throws Exception;
+    List<String> getBookIdsByUserName(String username) throws Exception;
+
+    List<Book> getBooksByUserName(String username, String curr, String limit) throws Exception;
 
     void borrowBook(String username, String bookId) throws Exception;
+
+    void backBook(String username, String bookId) throws Exception;
 
     int borrowBookTimes(String username) throws Exception;
 
