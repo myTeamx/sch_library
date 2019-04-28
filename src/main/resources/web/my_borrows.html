@@ -41,17 +41,8 @@
 <script>
 
     var username = $('#username').val();
-    // 定义成全局变量，当借阅被点击时，向数组中加入id，并且发送ajax请求
-    // 下次刷新，数组中带有全部的bookIds
-    // var bookIds = '';
+    var num = 0;
 
-    // // 界面增加书籍借阅次数
-    // function addBorrowBookTimes() {
-    //     var borrowBookTimesObj = $('#borrowBookTimes', window.parent.document);
-    //     var count = borrowBookTimesObj.html();
-    //     borrowBookTimesObj.html(parseInt(count) + 1);
-    // }
-    //
     // 界面减少书籍在借次数
     function reduceOnBorrowBookCount() {
         var onBorrowBookCountObj = $('#onBorrowBookCount', window.parent.document);
@@ -69,19 +60,12 @@
             type: 'POST',
             url: './borrow/backBook.action?username='+username+'&bookId='+bookId,
             success: function () {
+                num -= 1;
+                pageChange();
                 layer.msg('归还成功');
             }
         });
     }
-
-    // $.ajax({
-    //     type: 'POST',
-    //     url: './borrow/getBookIdsByUserName.action?username='+username,
-    //     success: function (myBookIds) {
-    //         bookIds = myBookIds;
-    //         page();
-    //     }
-    // });
 
     page();
 
@@ -91,19 +75,20 @@
             url: './borrow/onBorrowBookCount.action',
             data: {username: username},
             success: function (data) {
-                pageChange(data);
+                num = data;
+                pageChange();
             }
         });
     }
 
-    function pageChange(data) {
+    function pageChange() {
         layui.use(['laypage', 'layer'], function() {
             var laypage = layui.laypage;
             var layer = layui.layer;
             //完整功能
             laypage.render({
                 elem: 'page',
-                count: data,
+                count: num,
                 limit: 5,
                 layout: ['prev', 'page', 'next', 'count'],
                 jump: function(obj){
