@@ -15,16 +15,21 @@ public class BookServiceImpl implements BookService {
     private BookMapper bookMapper;
 
     @Override
-    public List<Book> getAllByPage(String curr, String limit) throws Exception {
+    public List<Book> getAllByPage(String curr, String limit, String bookCategory) throws Exception {
         int index = Integer.valueOf(curr);
         int pageSize = Integer.valueOf(limit);
         int start = (index - 1) * pageSize;
-        return bookMapper.getAllByPage(start, pageSize);
+        return bookMapper.getAllByPage(start, pageSize, bookCategory);
     }
 
     @Override
     public int count() throws Exception {
         return bookMapper.count();
+    }
+
+    @Override
+    public int countByCat(String bookCategory) throws Exception {
+        return bookMapper.countByCat(bookCategory);
     }
 
     @Override

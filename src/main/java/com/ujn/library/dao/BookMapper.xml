@@ -11,11 +11,19 @@
   </resultMap>
 
   <select id="getAllByPage" resultMap="BaseResultMap">
-    select * from book order by createtime limit ${start},${pageSize}
+    select * from book
+    <if test="bookCategory!='' and bookCategory!=null">
+      where category like concat('%',#{bookCategory},'%')
+    </if>
+    order by createtime limit ${start},${pageSize}
   </select>
 
   <select id="count" resultType="Integer">
     select count(*) from book
+  </select>
+
+  <select id="countByCat" parameterType="String" resultType="Integer">
+    select count(*) from book where category like concat('%',#{bookCategory},'%')
   </select>
 
   <select id="getByBookName" parameterType="String" resultMap="BaseResultMap">

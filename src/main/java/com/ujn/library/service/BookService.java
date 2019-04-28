@@ -6,9 +6,11 @@ import java.util.List;
 
 public interface BookService {
 
-    List<Book> getAllByPage(String curr, String limit) throws Exception;
+    List<Book> getAllByPage(String curr, String limit, String bookCategory) throws Exception;
 
     int count() throws Exception;
+
+    int countByCat(String bookCategory) throws Exception;
 
     List<Book> getByBookName(String bookName) throws Exception;
 
