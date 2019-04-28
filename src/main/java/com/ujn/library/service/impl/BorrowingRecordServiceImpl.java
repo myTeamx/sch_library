@@ -6,6 +6,9 @@ import com.ujn.library.dao.UserMapper;
 import com.ujn.library.entity.Book;
 import com.ujn.library.entity.BorrowingRecord;
 import com.ujn.library.service.BorrowingRecordService;
+import com.ujn.library.util.BorrowLogger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -47,6 +50,7 @@ public class BorrowingRecordServiceImpl implements BorrowingRecordService {
         borrowingRecord.setBookId(bookId);
         borrowingRecord.setState(new Byte("0"));
         borrowingRecordMapper.borrowBook(borrowingRecord);
+        BorrowLogger.borrowLog(bookMapper, username, userId, bookId, 0);
     }
 
     @Override
@@ -56,6 +60,7 @@ public class BorrowingRecordServiceImpl implements BorrowingRecordService {
         borrowingRecord.setUserId(userId);
         borrowingRecord.setBookId(bookId);
         borrowingRecordMapper.backBook(borrowingRecord);
+        BorrowLogger.borrowLog(bookMapper, username, userId, bookId, 1);
     }
 
     @Override

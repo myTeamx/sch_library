@@ -1,0 +1,1 @@
+2019-04-28 18:20:33.465 [http-nio-8080-exec-5-26] INFO  com.ujn.library.util.BorrowLogger 26 borrowLog - {borrowInfo: [userId=cbb7249a-49f1-4d5a-bbf0-9aa82ca0d204],[username=111],[bookId=88f5a70a-d847-4e32-b318-b36048077578],[bookName=Java语言程序设计],[author=龚炳江 文志诚],[press=人民邮电出版社],[category=计算机科学类],[isBorrow=0],[time=2019-04-28 18:20:33]}

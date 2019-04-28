@@ -1,0 +1,17 @@
+2019-04-28 18:19:43.415 [restartedMain-50] INFO  com.ujn.library.LibraryApplication 50 logStarting - Starting LibraryApplication on DESKTOP-41A9TU7 with PID 10788 (E:\workspace\library\target\classes started by Admin in E:\workspace\library)
+2019-04-28 18:19:43.416 [restartedMain-679] INFO  com.ujn.library.LibraryApplication 679 logStartupProfileInfo - The following profiles are active: dev
+2019-04-28 18:19:44.302 [restartedMain-173] INFO  org.apache.coyote.http11.Http11NioProtocol 173 log - Initializing ProtocolHandler ["http-nio-8080"]
+2019-04-28 18:19:44.308 [restartedMain-173] INFO  org.apache.catalina.core.StandardService 173 log - Starting service [Tomcat]
+2019-04-28 18:19:44.308 [restartedMain-173] INFO  org.apache.catalina.core.StandardEngine 173 log - Starting Servlet engine: [Apache Tomcat/9.0.17]
+2019-04-28 18:19:44.405 [restartedMain-173] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] 173 log - Initializing Spring embedded WebApplicationContext
+2019-04-28 18:19:44.493 [restartedMain-110] INFO  com.zaxxer.hikari.HikariDataSource 110 getConnection - HikariPool-1 - Starting...
+2019-04-28 18:19:44.831 [restartedMain-123] INFO  com.zaxxer.hikari.HikariDataSource 123 getConnection - HikariPool-1 - Start completed.
+2019-04-28 18:19:44.895 [restartedMain-46] INFO  org.hibernate.Version 46 logVersion - HHH000412: Hibernate Core {5.3.9.Final}
+2019-04-28 18:19:44.895 [restartedMain-213] INFO  org.hibernate.cfg.Environment 213 <clinit> - HHH000206: hibernate.properties not found
+2019-04-28 18:19:44.966 [restartedMain-49] INFO  org.hibernate.annotations.common.Version 49 <clinit> - HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-04-28 18:19:45.059 [restartedMain-157] INFO  org.hibernate.dialect.Dialect 157 <init> - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2019-04-28 18:19:45.522 [restartedMain-150] WARN  org.thymeleaf.templatemode.TemplateMode 150 parse - [THYMELEAF][restartedMain] Template Mode 'HTML5' is deprecated. Using Template Mode 'HTML' instead.
+2019-04-28 18:19:45.665 [restartedMain-173] INFO  org.apache.coyote.http11.Http11NioProtocol 173 log - Starting ProtocolHandler ["http-nio-8080"]
+2019-04-28 18:19:45.689 [restartedMain-59] INFO  com.ujn.library.LibraryApplication 59 logStarted - Started LibraryApplication in 2.52 seconds (JVM running for 3.144)
+2019-04-28 18:19:51.306 [http-nio-8080-exec-1-173] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] 173 log - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-04-28 18:20:33.465 [http-nio-8080-exec-5-26] INFO  com.ujn.library.util.BorrowLogger 26 borrowLog - {borrowInfo: [userId=cbb7249a-49f1-4d5a-bbf0-9aa82ca0d204],[username=111],[bookId=88f5a70a-d847-4e32-b318-b36048077578],[bookName=Java语言程序设计],[author=龚炳江 文志诚],[press=人民邮电出版社],[category=计算机科学类],[isBorrow=0],[time=2019-04-28 18:20:33]}
