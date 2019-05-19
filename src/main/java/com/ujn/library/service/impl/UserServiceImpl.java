@@ -35,4 +35,9 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
+
+    @Override
+    public String getUserIdByName(String username) throws Exception {
+        return userMapper.getIdByName(username);
+    }
 }

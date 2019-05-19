@@ -17,7 +17,7 @@
 					<li class="layui-nav-item">
 						<a href="javascript:void(0)">其它功能</a>
 						<dl class="layui-nav-child">
-							<dd><a href="javascript:void(0)">借阅历史</a></dd>
+							<dd><a id="bor_history" href="javascript:void(0)">借阅历史</a></dd>
 							<dd><a href="javascript:void(0)">留言管理(暂未开放)</a></dd>
 							<dd><a href="javascript:void(0)">我的好友(暂未开放)</a></dd>
 						</dl>
@@ -27,7 +27,7 @@
 					<li class="layui-nav-item" style="width: 100px">
 						<a style="font-size: 15px" href="javascript:void(0)" th:text="${session.username}"><img src="http://m.zhengjinfan.cn/images/0.jpg" class="layui-nav-img"></a>
 						<dl class="layui-nav-child">
-							<dd><a href="javascript:void(0)">基本资料</a></dd>
+							<!--<dd><a href="javascript:void(0)">基本资料</a></dd>-->
 							<dd><a href="../login/logout.action">安全退出</a></dd>
 						</dl>
 					</li>
@@ -43,7 +43,7 @@
 							<div class="layui-card-header" style="padding: 0; height: 5.625rem;">
 								<a href=""><img th:src="@{/img/index/头像.png}" class="layui-nav-img" style="width: 3.125rem; height: 3.125rem;"></a>
 								<span style="color: white; font-size: 0.9375rem; position: relative; top: 10px; letter-spacing: 0.125rem;">
-									借书<span style="font-size: 1.875rem; letter-spacing: 0.125rem;" id="borrowBookTimes">XX</span>次
+									借书<span style="font-size: 1.875rem; letter-spacing: 0.125rem;" id="borrowBookTimes"></span>次
 								</span>
 								<!--<img th:src="@{/img/index/bookmark_red.png}" style="width: 3.125rem; height: 5.3125rem; position: relative; top: -1.5625rem; left: 1.875rem;" />-->
 							</div>
@@ -86,12 +86,18 @@
 					</div>
 					
 					<!-- 右侧推荐 -->
-					<div class="layui-col-md2">
+					<div id="recommend" class="layui-col-md2">
 						<div class="layui-card" style="border-radius: 0.625rem;">
 							<div class="layui-card-header">猜你喜欢</div>
-							<div class="layui-card-body">
-								
-							</div>
+							<!--<div class="layui-card-body">-->
+								<!--<button style="width: 100%" class="layui-btn layui-btn-radius layui-elip">书名书名书名书名书名书名书名书名书名</button>-->
+							<!--</div>-->
+							<!--<div class="layui-card-body">-->
+								<!--<button style="width: 100%" class="layui-btn layui-btn-radius layui-elip">书名书名书名书名书名书名书名书名书名</button>-->
+							<!--</div>-->
+							<!--<div class="layui-card-body">-->
+								<!--<button style="width: 100%" class="layui-btn layui-btn-radius layui-elip">书名书名书名书名书名书名书名书名书名</button>-->
+							<!--</div>-->
 						</div>
 					</div>
 					
@@ -101,16 +107,152 @@
 			
 		</div>
 
+		<div class="layui-row" id="book_recommend" style="display: none;">
+			<div class="layui-col-md10" style="margin-top:30px">
+				<form class="layui-form">
+					<div class="layui-form-item" style="display: none">
+						<label class="layui-form-label">id：</label>
+						<div class="layui-input-block">
+							<input type="text" name="id" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">书名：</label>
+						<div class="layui-input-block">
+							<input type="text" name="bookName" lay-verify="required" class="layui-input" disabled>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">作者：</label>
+						<div class="layui-input-block">
+							<input type="text" name="author" lay-verify="required" class="layui-input" disabled>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">出版社：</label>
+						<div class="layui-input-block">
+							<input type="text" name="press" lay-verify="required" class="layui-input" disabled>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">分类：</label>
+						<div class="layui-input-block">
+							<input type="text" name="category" lay-verify="required" class="layui-input" disabled>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
 		<input id="username" style="display: none" th:value="${session.username}">
 		
 		<script th:src="@{/js/layui/layui.all.js}"></script>
 		<script th:src="@{/js/layui/jquery.js}"></script>
 		<script>
-			layui.use('element', function(){
+			// 界面增加书籍借阅次数
+			function addBorrowBookTimes() {
+				var borrowBookTimesObj = $('#borrowBookTimes');
+				var count = borrowBookTimesObj.html();
+				borrowBookTimesObj.html(parseInt(count) + 1);
+			}
+
+			// 界面增加书籍在借次数
+			function addOnBorrowBookCount() {
+				var onBorrowBookCountObj = $('#onBorrowBookCount');
+				var count = onBorrowBookCountObj.html();
+				onBorrowBookCountObj.html(parseInt(count) + 1);
+			}
+			function cli(bookJsonStr) {
+				var username = $('#username').val();
+				var bookJson = eval(bookJsonStr);
+				var book = bookJson.book;
+				$.ajax({
+					type: "POST",
+					url: "../borrow/getBookIdsByUserName.action",
+					data: {username: username},
+					success: function (bookIds) {
+						// 如果已经借阅这本书，则不弹框，提示
+						if (bookIds.indexOf(book.id) > -1) {
+							layer.msg("您已经借阅这本书");
+						} else {
+							layer.open({
+								type: 1,
+								title: ['书籍详情', 'font-size: 18px'],
+								content: $("#book_recommend"),
+								area: ['400px', '450px'],
+								btn: ['借阅', '取消'],
+								yes: function (index) {
+									layui.use("form", function () {
+										var form = layui.form;
+										form.on('submit(editRole)', function (bookData) {
+											var bookJson = bookData.field;
+											var book = eval(bookJson);
+											layer.close(index); // 关闭弹窗
+											$.ajax({
+												type: 'POST',
+												url: '../borrow/borrowBook.action?username='+username+'&bookId='+book.id,
+												data: bookJson,
+												success: function () {
+													layer.msg('借阅成功');
+													addBorrowBookTimes();
+													addOnBorrowBookCount();
+												}
+											});
+											return false;
+										});
+									})
+								},
+								// 弹出框消失后的回调函数
+								end: function () {
+									$('#book_recommend').css('display', 'none');
+								},
+								// 弹出成功后的回调函数
+								success: function (layero, index) {
+									// 向编辑弹窗加载数据
+									$('#book_recommend input[name="id"]').val(book.id);
+									$('#book_recommend input[name="bookName"]').val(book.bookName);
+									$('#book_recommend input[name="author"]').val(book.author);
+									$('#book_recommend input[name="press"]').val(book.press);
+									$('#book_recommend input[name="category"]').val(book.category);
+									// 将弹窗的按钮修改为form的按钮
+									layero.addClass('layui-form');
+									layero.find('.layui-layer-btn0').attr({
+										'lay-filter': 'editRole',
+										'lay-submit': ''
+									})
+								}
+							});
+						}
+					}
+				});
+				
+
+			}
+		</script>
+		<script>
+			layui.use(['element', 'form'], function(){
 				var element = layui.element;
+				var form = layui.form;
 				var str = '<iframe scrolling="auto" frameborder="0" src="../book_show.action" style="width:100%;height:50rem;"></iframe>';
 			  	$('#body_center div[class="layui-card-body"]').html(str);
 			  	var username = $('#username').val();
+
+			  	$.ajax({
+					type: "POST",
+					url: "../recommend/getRecommendBooks.action",
+					data: {username: username},
+					success: function (books) {
+						$.each(books, function (index, book) {
+							var bookJson = {book: book};
+							var bookJsonStr = JSON.stringify(bookJson);
+							var str = "<div class='layui-card-body layui-anim layui-anim-upbit'>" +
+									  	"<button style='width: 100%' class='layui-btn layui-btn-radius layui-elip' onclick='cli("+bookJsonStr+")'>"+book.bookName+"</button>" +
+									  "</div>";
+							$("#recommend>div").append(str);
+						});
+					}
+				});
+
 				$.ajax({
 					type: 'POST',
 					url: '../borrow/borrowBookTimes.action',
@@ -158,6 +300,13 @@
 
 			});
 		</script>
-		
+
+		<script>
+			$("#bor_history").click(function () {
+				var str = '<iframe scrolling="auto" frameborder="0" src="../bor_history.action" style="width:100%;height:50rem;"></iframe>';
+				$('#body_center div[class="layui-card-body"]').html(str);
+			});
+		</script>
+
 	</body>
 </html>

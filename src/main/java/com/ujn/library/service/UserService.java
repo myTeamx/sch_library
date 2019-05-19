@@ -6,4 +6,6 @@ public interface UserService {
 
     boolean login(String name, String password, HttpServletRequest request) throws Exception;
 
+    String getUserIdByName(String username) throws Exception;
+
 }

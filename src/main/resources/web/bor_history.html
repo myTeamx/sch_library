@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>借阅历史</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/js/layui/css/layui.css}" media="all">
+</head>
+<body>
+
+<div id="history" class="layui-row" style="padding: 1.25rem 8%; height: 600px">
+
+    <ul class="layui-timeline">
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+            <div class="layui-timeline-content layui-text">
+                <h3 class="layui-timeline-title">8月18日</h3>
+                <p>
+                    layui 2.0 的一切准备工作似乎都已到位。发布之弦，一触即发。
+                    <br>不枉近百个日日夜夜与之为伴。因小而大，因弱而强。
+                    <br>无论它能走多远，抑或如何支撑？至少我曾倾注全心，无怨无悔 <i class="layui-icon"></i>
+                </p>
+            </div>
+        </li>
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+            <div class="layui-timeline-content layui-text">
+                <h3 class="layui-timeline-title">8月18日</h3>
+                <p>
+                    layui 2.0 的一切准备工作似乎都已到位。发布之弦，一触即发。
+                    <br>不枉近百个日日夜夜与之为伴。因小而大，因弱而强。
+                    <br>无论它能走多远，抑或如何支撑？至少我曾倾注全心，无怨无悔 <i class="layui-icon"></i>
+                </p>
+            </div>
+        </li>
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+            <div class="layui-timeline-content layui-text">
+                <h3 class="layui-timeline-title">8月18日</h3>
+                <p>
+                    layui 2.0 的一切准备工作似乎都已到位。发布之弦，一触即发。
+                    <br>不枉近百个日日夜夜与之为伴。因小而大，因弱而强。
+                    <br>无论它能走多远，抑或如何支撑？至少我曾倾注全心，无怨无悔 <i class="layui-icon"></i>
+                </p>
+            </div>
+        </li>
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+            <div class="layui-timeline-content layui-text">
+                <h3 class="layui-timeline-title">8月18日</h3>
+                <p>
+                    layui 2.0 的一切准备工作似乎都已到位。发布之弦，一触即发。
+                    <br>不枉近百个日日夜夜与之为伴。因小而大，因弱而强。
+                    <br>无论它能走多远，抑或如何支撑？至少我曾倾注全心，无怨无悔 <i class="layui-icon"></i>
+                </p>
+            </div>
+        </li>
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+            <div class="layui-timeline-content layui-text">
+                <h3 class="layui-timeline-title">8月16日</h3>
+                <p>杜甫的思想核心是儒家的仁政思想，他有“<em>致君尧舜上，再使风俗淳</em>”的宏伟抱负。个人最爱的名篇有：</p>
+                <ul>
+                    <li>《登高》</li>
+                    <li>《茅屋为秋风所破歌》</li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+</div>
+
+<div class="layui-row" style="padding: 1.25rem 0%;">
+    <!-- 分页 -->
+    <div id="page" style="text-align: center; margin-top: 2.5rem;"></div>
+</div>
+<input id="username" th:value="${session.username}" style="display: none">
+
+
+<script th:src="@{/js/layui/layui.all.js}"></script>
+<script th:src="@{/js/layui/jquery.js}"></script>
+
+<script>
+
+    pageChange();
+    
+    $.ajax({
+        type: "POST",
+        url: "",
+        data: "",
+        success: function (data) {
+            
+        }
+    });
+
+    function jmp(obj, bookCat) {
+        var str = '';
+        if (obj !== undefined) {
+            obj.bookCategory = bookCat;
+            $.ajax({
+                type: 'POST',
+                url: './book/show.action',
+                data: obj,
+                success: function (booksJson) {
+                    var books = eval(booksJson);
+                    $.each(books, function (index, book) {
+                        var isBorrowed = false;
+                        if (bookIds.length != 0) {
+                            if ($.inArray(book.id, bookIds) >= 0) {
+                                isBorrowed = true;
+                            }
+                        }
+                        if (isBorrowed) { // 已借阅这本书
+                            str +=
+                                '<div class="layui-card layui-bg-green layui-anim layui-anim-upbit" style="border-radius: 0.625rem; height: 100px;">' +
+                                '<div class="layui-card-body">' +
+                                '<div style="float: left;">' +
+                                '<div style="font-size: 1.25rem; margin-bottom: 0.625rem;">' +
+                                '<span>《</span>'+book.bookName+'<span>》</span>' +
+                                '</div>' +
+                                '<div style="margin-left: 0.625rem;">'+book.category+'</div>' +
+                                '<div style="margin-left: 0.625rem;">' +
+                                '<span>'+book.author+'</span>/<span>'+book.press+'</span>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div style="float: right;">' +
+                                '<div style="margin-bottom: 1.25rem; height: 24px"><div id="borrowed'+index+'" class="show">' +
+                                '<input style="display: none" value="'+book.id+'">' +
+                                '<i class="layui-icon layui-icon-ok-circle" style="font-size: 0.9375rem; color: black;"></i>' +
+                                '已借阅</div></div>' +
+                                '<div id="borrow'+index+'" style="display: none"><button onclick="borrowBook('+index+')" class="layui-btn layui-btn-sm layui-btn-warm">借阅</button></div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>';
+                        } else { // 未借阅这本书
+                            str +=
+                                '<div class="layui-card layui-bg-green layui-anim layui-anim-upbit" style="border-radius: 0.625rem; height: 100px;">' +
+                                '<div class="layui-card-body">' +
+                                '<div style="float: left;">' +
+                                '<div style="font-size: 1.25rem; margin-bottom: 0.625rem;">' +
+                                '<span>《</span>'+book.bookName+'<span>》</span>' +
+                                '</div>' +
+                                '<div style="margin-left: 0.625rem;">'+book.category+'</div>' +
+                                '<div style="margin-left: 0.625rem;">' +
+                                '<span>'+book.author+'</span>/<span>'+book.press+'</span>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div style="float: right;">' +
+                                '<div style="margin-bottom: 1.25rem; height: 24px"><div id="borrowed'+index+'" class="noShow">' +
+                                '<input style="display: none" value="'+book.id+'">' +
+                                '<i class="layui-icon layui-icon-ok-circle" style="font-size: 0.9375rem; color: black;"></i>' +
+                                '已借阅</div></div>' +
+                                '<div id="borrow'+index+'"><button onclick="borrowBook('+index+')" class="layui-btn layui-btn-sm layui-btn-warm">借阅</button></div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>';
+                        }
+
+                    });
+                    $('#books > div').html(str);
+
+                }
+            });
+
+        }
+    }
+
+    function pageChange() {
+        layui.use(['laypage', 'layer'], function() {
+            var laypage = layui.laypage;
+            var layer = layui.layer;
+            //完整功能
+            laypage.render({
+                elem: 'page',
+                count: 100,
+                limit: 5,
+                layout: ['prev', 'page', 'next', 'count'],
+                jump: function(obj){
+                    jmp(obj);
+                }
+            });
+        });
+    }
+</script>
+
+</body>
+</html>

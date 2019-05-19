@@ -1,51 +1,51 @@
-2019-04-28 18:19:54.306 [http-nio-8080-exec-8-159] DEBUG com.ujn.library.dao.UserMapper.getPasswordByName 159 debug - ==>  Preparing: select password from user where name=? 
-2019-04-28 18:19:54.319 [http-nio-8080-exec-8-159] DEBUG com.ujn.library.dao.UserMapper.getPasswordByName 159 debug - ==> Parameters: 111(String)
-2019-04-28 18:19:54.332 [http-nio-8080-exec-8-159] DEBUG com.ujn.library.dao.UserMapper.getPasswordByName 159 debug - <==      Total: 1
-2019-04-28 18:19:54.442 [http-nio-8080-exec-8-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - ==>  Preparing: select id from user where name=? 
-2019-04-28 18:19:54.442 [http-nio-8080-exec-8-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - ==> Parameters: 111(String)
-2019-04-28 18:19:54.446 [http-nio-8080-exec-2-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - ==>  Preparing: select id from user where name=? 
-2019-04-28 18:19:54.447 [http-nio-8080-exec-2-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - ==> Parameters: 111(String)
-2019-04-28 18:19:54.447 [http-nio-8080-exec-6-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - ==>  Preparing: select id from user where name=? 
-2019-04-28 18:19:54.447 [http-nio-8080-exec-6-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - ==> Parameters: 111(String)
-2019-04-28 18:19:54.448 [http-nio-8080-exec-8-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - <==      Total: 1
-2019-04-28 18:19:54.449 [http-nio-8080-exec-8-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.count 159 debug - ==>  Preparing: select count(*) from borrowing_record where user_id=? 
-2019-04-28 18:19:54.449 [http-nio-8080-exec-8-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.count 159 debug - ==> Parameters: cbb7249a-49f1-4d5a-bbf0-9aa82ca0d204(String)
-2019-04-28 18:19:54.450 [http-nio-8080-exec-2-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - <==      Total: 1
-2019-04-28 18:19:54.451 [http-nio-8080-exec-6-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - <==      Total: 1
-2019-04-28 18:19:54.452 [http-nio-8080-exec-6-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.onCount 159 debug - ==>  Preparing: select count(*) from borrowing_record where state=0 and user_id=? 
-2019-04-28 18:19:54.452 [http-nio-8080-exec-6-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.onCount 159 debug - ==> Parameters: cbb7249a-49f1-4d5a-bbf0-9aa82ca0d204(String)
-2019-04-28 18:19:54.454 [http-nio-8080-exec-8-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.count 159 debug - <==      Total: 1
-2019-04-28 18:19:54.457 [http-nio-8080-exec-6-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.onCount 159 debug - <==      Total: 1
-2019-04-28 18:19:54.462 [http-nio-8080-exec-2-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.getBorrowBookIds 159 debug - ==>  Preparing: select book_id from borrowing_record where user_id=? order by createtime desc limit 0,3 
-2019-04-28 18:19:54.463 [http-nio-8080-exec-2-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.getBorrowBookIds 159 debug - ==> Parameters: cbb7249a-49f1-4d5a-bbf0-9aa82ca0d204(String)
-2019-04-28 18:19:54.467 [http-nio-8080-exec-2-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.getBorrowBookIds 159 debug - <==      Total: 3
-2019-04-28 18:19:54.468 [http-nio-8080-exec-2-159] DEBUG com.ujn.library.dao.BookMapper.getByBookId 159 debug - ==>  Preparing: select * from book where id=? 
-2019-04-28 18:19:54.468 [http-nio-8080-exec-2-159] DEBUG com.ujn.library.dao.BookMapper.getByBookId 159 debug - ==> Parameters: 4d2c1c12-e44f-4b04-b84b-211e2d36a68b(String)
-2019-04-28 18:19:54.580 [http-nio-8080-exec-2-159] DEBUG com.ujn.library.dao.BookMapper.getByBookId 159 debug - <==      Total: 1
-2019-04-28 18:19:54.581 [http-nio-8080-exec-3-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - ==>  Preparing: select id from user where name=? 
-2019-04-28 18:19:54.581 [http-nio-8080-exec-2-159] DEBUG com.ujn.library.dao.BookMapper.getByBookId 159 debug - ==>  Preparing: select * from book where id=? 
-2019-04-28 18:19:54.581 [http-nio-8080-exec-3-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - ==> Parameters: 111(String)
-2019-04-28 18:19:54.582 [http-nio-8080-exec-2-159] DEBUG com.ujn.library.dao.BookMapper.getByBookId 159 debug - ==> Parameters: e686dd70-342e-4fb0-9f4b-46067a309a3b(String)
-2019-04-28 18:19:54.585 [http-nio-8080-exec-2-159] DEBUG com.ujn.library.dao.BookMapper.getByBookId 159 debug - <==      Total: 1
-2019-04-28 18:19:54.585 [http-nio-8080-exec-3-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - <==      Total: 1
-2019-04-28 18:19:54.585 [http-nio-8080-exec-2-159] DEBUG com.ujn.library.dao.BookMapper.getByBookId 159 debug - ==>  Preparing: select * from book where id=? 
-2019-04-28 18:19:54.585 [http-nio-8080-exec-2-159] DEBUG com.ujn.library.dao.BookMapper.getByBookId 159 debug - ==> Parameters: f164bc1e-1bd5-4982-8c69-6bf8308d30e3(String)
-2019-04-28 18:19:54.586 [http-nio-8080-exec-3-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.getBookIdsByUserId 159 debug - ==>  Preparing: select book_id from borrowing_record where user_id=? and state=0 
-2019-04-28 18:19:54.586 [http-nio-8080-exec-3-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.getBookIdsByUserId 159 debug - ==> Parameters: cbb7249a-49f1-4d5a-bbf0-9aa82ca0d204(String)
-2019-04-28 18:19:54.589 [http-nio-8080-exec-2-159] DEBUG com.ujn.library.dao.BookMapper.getByBookId 159 debug - <==      Total: 1
-2019-04-28 18:19:54.591 [http-nio-8080-exec-3-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.getBookIdsByUserId 159 debug - <==      Total: 6
-2019-04-28 18:19:54.611 [http-nio-8080-exec-10-159] DEBUG com.ujn.library.dao.BookMapper.count 159 debug - ==>  Preparing: select count(*) from book 
-2019-04-28 18:19:54.611 [http-nio-8080-exec-10-159] DEBUG com.ujn.library.dao.BookMapper.count 159 debug - ==> Parameters: 
-2019-04-28 18:19:54.616 [http-nio-8080-exec-10-159] DEBUG com.ujn.library.dao.BookMapper.count 159 debug - <==      Total: 1
-2019-04-28 18:19:54.624 [http-nio-8080-exec-1-159] DEBUG com.ujn.library.dao.BookMapper.getAllByPage 159 debug - ==>  Preparing: select * from book order by createtime limit 0,5 
-2019-04-28 18:19:54.624 [http-nio-8080-exec-1-159] DEBUG com.ujn.library.dao.BookMapper.getAllByPage 159 debug - ==> Parameters: 
-2019-04-28 18:19:54.630 [http-nio-8080-exec-1-159] DEBUG com.ujn.library.dao.BookMapper.getAllByPage 159 debug - <==      Total: 5
-2019-04-28 18:20:33.439 [http-nio-8080-exec-5-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - ==>  Preparing: select id from user where name=? 
-2019-04-28 18:20:33.440 [http-nio-8080-exec-5-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - ==> Parameters: 111(String)
-2019-04-28 18:20:33.444 [http-nio-8080-exec-5-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - <==      Total: 1
-2019-04-28 18:20:33.445 [http-nio-8080-exec-5-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.borrowBook 159 debug - ==>  Preparing: insert into borrowing_record (id,user_id,book_id,state) values (?,?,?,?) 
-2019-04-28 18:20:33.446 [http-nio-8080-exec-5-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.borrowBook 159 debug - ==> Parameters: efd77bac-e051-4714-bd7c-3413721ae11b(String), cbb7249a-49f1-4d5a-bbf0-9aa82ca0d204(String), 88f5a70a-d847-4e32-b318-b36048077578(String), 0(Byte)
-2019-04-28 18:20:33.457 [http-nio-8080-exec-5-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.borrowBook 159 debug - <==    Updates: 1
-2019-04-28 18:20:33.458 [http-nio-8080-exec-5-159] DEBUG com.ujn.library.dao.BookMapper.getByBookId 159 debug - ==>  Preparing: select * from book where id=? 
-2019-04-28 18:20:33.459 [http-nio-8080-exec-5-159] DEBUG com.ujn.library.dao.BookMapper.getByBookId 159 debug - ==> Parameters: 88f5a70a-d847-4e32-b318-b36048077578(String)
-2019-04-28 18:20:33.464 [http-nio-8080-exec-5-159] DEBUG com.ujn.library.dao.BookMapper.getByBookId 159 debug - <==      Total: 1
+2019-05-19 18:55:28.783 [http-nio-8080-exec-2-159] DEBUG com.ujn.library.dao.UserMapper.getPasswordByName 159 debug - ==>  Preparing: select password from user where name=? 
+2019-05-19 18:55:28.830 [http-nio-8080-exec-2-159] DEBUG com.ujn.library.dao.UserMapper.getPasswordByName 159 debug - ==> Parameters: 张三(String)
+2019-05-19 18:55:28.877 [http-nio-8080-exec-2-159] DEBUG com.ujn.library.dao.UserMapper.getPasswordByName 159 debug - <==      Total: 1
+2019-05-19 18:55:29.230 [http-nio-8080-exec-2-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - ==>  Preparing: select id from user where name=? 
+2019-05-19 18:55:29.230 [http-nio-8080-exec-2-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - ==> Parameters: 张三(String)
+2019-05-19 18:55:29.290 [http-nio-8080-exec-2-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - <==      Total: 1
+2019-05-19 18:55:29.294 [http-nio-8080-exec-3-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - ==>  Preparing: select id from user where name=? 
+2019-05-19 18:55:29.294 [http-nio-8080-exec-5-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - ==>  Preparing: select id from user where name=? 
+2019-05-19 18:55:29.294 [http-nio-8080-exec-3-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - ==> Parameters: 张三(String)
+2019-05-19 18:55:29.294 [http-nio-8080-exec-2-159] DEBUG com.ujn.library.dao.RecommendMapper.getRecommendBooks 159 debug - ==>  Preparing: select book.* from (select book_id from recomm_record where user_id=? order by createtime desc limit 0,3) rec left join book on rec.book_id=book.id 
+2019-05-19 18:55:29.294 [http-nio-8080-exec-5-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - ==> Parameters: 张三(String)
+2019-05-19 18:55:29.294 [http-nio-8080-exec-2-159] DEBUG com.ujn.library.dao.RecommendMapper.getRecommendBooks 159 debug - ==> Parameters: 0001(String)
+2019-05-19 18:55:29.294 [http-nio-8080-exec-4-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - ==>  Preparing: select id from user where name=? 
+2019-05-19 18:55:29.294 [http-nio-8080-exec-4-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - ==> Parameters: 张三(String)
+2019-05-19 18:55:29.302 [http-nio-8080-exec-3-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - <==      Total: 1
+2019-05-19 18:55:29.302 [http-nio-8080-exec-5-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - <==      Total: 1
+2019-05-19 18:55:29.302 [http-nio-8080-exec-4-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - <==      Total: 1
+2019-05-19 18:55:29.302 [http-nio-8080-exec-5-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.count 159 debug - ==>  Preparing: select count(*) from borrowing_record where user_id=? 
+2019-05-19 18:55:29.302 [http-nio-8080-exec-5-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.count 159 debug - ==> Parameters: 0001(String)
+2019-05-19 18:55:29.306 [http-nio-8080-exec-4-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.onCount 159 debug - ==>  Preparing: select count(*) from borrowing_record where state=0 and user_id=? 
+2019-05-19 18:55:29.306 [http-nio-8080-exec-2-159] DEBUG com.ujn.library.dao.RecommendMapper.getRecommendBooks 159 debug - <==      Total: 3
+2019-05-19 18:55:29.306 [http-nio-8080-exec-4-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.onCount 159 debug - ==> Parameters: 0001(String)
+2019-05-19 18:55:29.310 [http-nio-8080-exec-5-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.count 159 debug - <==      Total: 1
+2019-05-19 18:55:29.314 [http-nio-8080-exec-4-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.onCount 159 debug - <==      Total: 1
+2019-05-19 18:55:29.334 [http-nio-8080-exec-3-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.getBorrowBookIds 159 debug - ==>  Preparing: select book_id from borrowing_record where user_id=? order by createtime desc limit 0,3 
+2019-05-19 18:55:29.334 [http-nio-8080-exec-3-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.getBorrowBookIds 159 debug - ==> Parameters: 0001(String)
+2019-05-19 18:55:29.346 [http-nio-8080-exec-3-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.getBorrowBookIds 159 debug - <==      Total: 3
+2019-05-19 18:55:29.350 [http-nio-8080-exec-3-159] DEBUG com.ujn.library.dao.BookMapper.getByBookId 159 debug - ==>  Preparing: select * from book where id=? 
+2019-05-19 18:55:29.350 [http-nio-8080-exec-3-159] DEBUG com.ujn.library.dao.BookMapper.getByBookId 159 debug - ==> Parameters: 03672a9f-ce31-4667-9a33-91bb6f5ed5ff(String)
+2019-05-19 18:55:29.354 [http-nio-8080-exec-3-159] DEBUG com.ujn.library.dao.BookMapper.getByBookId 159 debug - <==      Total: 1
+2019-05-19 18:55:29.358 [http-nio-8080-exec-3-159] DEBUG com.ujn.library.dao.BookMapper.getByBookId 159 debug - ==>  Preparing: select * from book where id=? 
+2019-05-19 18:55:29.362 [http-nio-8080-exec-3-159] DEBUG com.ujn.library.dao.BookMapper.getByBookId 159 debug - ==> Parameters: 39d9d2bd-7b86-46ab-bbe8-8892e8107503(String)
+2019-05-19 18:55:29.370 [http-nio-8080-exec-3-159] DEBUG com.ujn.library.dao.BookMapper.getByBookId 159 debug - <==      Total: 1
+2019-05-19 18:55:29.374 [http-nio-8080-exec-3-159] DEBUG com.ujn.library.dao.BookMapper.getByBookId 159 debug - ==>  Preparing: select * from book where id=? 
+2019-05-19 18:55:29.374 [http-nio-8080-exec-3-159] DEBUG com.ujn.library.dao.BookMapper.getByBookId 159 debug - ==> Parameters: 39d9d2bd-7b86-46ab-bbe8-8892e8107503(String)
+2019-05-19 18:55:29.382 [http-nio-8080-exec-3-159] DEBUG com.ujn.library.dao.BookMapper.getByBookId 159 debug - <==      Total: 1
+2019-05-19 18:55:29.470 [http-nio-8080-exec-7-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - ==>  Preparing: select id from user where name=? 
+2019-05-19 18:55:29.470 [http-nio-8080-exec-7-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - ==> Parameters: 张三(String)
+2019-05-19 18:55:29.478 [http-nio-8080-exec-7-159] DEBUG com.ujn.library.dao.UserMapper.getIdByName 159 debug - <==      Total: 1
+2019-05-19 18:55:29.478 [http-nio-8080-exec-7-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.getBookIdsByUserId 159 debug - ==>  Preparing: select book_id from borrowing_record where user_id=? and state=0 
+2019-05-19 18:55:29.478 [http-nio-8080-exec-7-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.getBookIdsByUserId 159 debug - ==> Parameters: 0001(String)
+2019-05-19 18:55:29.486 [http-nio-8080-exec-7-159] DEBUG com.ujn.library.dao.BorrowingRecordMapper.getBookIdsByUserId 159 debug - <==      Total: 10
+2019-05-19 18:55:29.518 [http-nio-8080-exec-6-159] DEBUG com.ujn.library.dao.BookMapper.count 159 debug - ==>  Preparing: select count(*) from book 
+2019-05-19 18:55:29.518 [http-nio-8080-exec-6-159] DEBUG com.ujn.library.dao.BookMapper.count 159 debug - ==> Parameters: 
+2019-05-19 18:55:29.526 [http-nio-8080-exec-6-159] DEBUG com.ujn.library.dao.BookMapper.count 159 debug - <==      Total: 1
+2019-05-19 18:55:29.558 [http-nio-8080-exec-8-159] DEBUG com.ujn.library.dao.BookMapper.getAllByPage 159 debug - ==>  Preparing: select * from book order by createtime limit 0,5 
+2019-05-19 18:55:29.562 [http-nio-8080-exec-8-159] DEBUG com.ujn.library.dao.BookMapper.getAllByPage 159 debug - ==> Parameters: 
+2019-05-19 18:55:29.818 [http-nio-8080-exec-8-159] DEBUG com.ujn.library.dao.BookMapper.getAllByPage 159 debug - <==      Total: 5
+2019-05-19 18:55:31.854 [http-nio-8080-exec-1-159] DEBUG com.ujn.library.dao.BookMapper.getAllByPage 159 debug - ==>  Preparing: select * from book order by createtime limit 0,5 
+2019-05-19 18:55:31.854 [http-nio-8080-exec-1-159] DEBUG com.ujn.library.dao.BookMapper.getAllByPage 159 debug - ==> Parameters: 
+2019-05-19 18:55:31.866 [http-nio-8080-exec-1-159] DEBUG com.ujn.library.dao.BookMapper.getAllByPage 159 debug - <==      Total: 5

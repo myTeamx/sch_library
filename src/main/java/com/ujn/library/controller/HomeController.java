@@ -22,4 +22,9 @@ public class HomeController {
         return "/my_borrows";
     }
 
+    @RequestMapping(value = "/bor_history.action")
+    public String borHistory() throws Exception {
+        return "/bor_history";
+    }
+
 }

@@ -1,0 +1,107 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+#container{
+	width: 1349px;
+	height: 800px;
+	background-image: url(../img/login/bg.jpg);
+	background-attachment: fixed;
+	background-size: 100% 100%;
+}
+
+#container>img{
+	position: absolute;
+	top: 290px;
+	left: 700px;
+	z-index: 999;
+}
+
+#container>div{
+	width: 555px;
+	margin: 0 auto;
+	position: relative;
+	top: 200px;
+}
+
+#form_head{
+	height: 120px;
+	width: 100%;
+	background-color: #ffffff;
+	color: #7c635b;
+	font-size: 18px;
+	background-image: url(../img/login/form_head_bg.png);
+}
+
+#form_head>div{
+	background-color: #ffffff;
+	width: 400px;
+	height: 120px;
+	margin-left: 5px;
+}
+
+#form_head>span{
+	position: absolute;
+	top: 38px;
+	left: 25px;
+}
+
+#container>div>form{
+	width: 100%;
+	background-color: #eeeeee;
+	padding-top: 30px;
+	border-radius: 4px;
+	position: relative;
+	top: -3px;
+}
+
+form>input{
+	border-radius: 5px;
+	display: block;
+	position: relative;
+	margin-bottom: 25px;
+	width: 470px;
+	height: 45px;
+	margin-left: 30px;
+	border: 2px solid #dddddd;
+	padding-left: 20px;
+	font-size: 15px;
+}
+
+form>div>input{
+	border-radius: 5px;
+	position: relative;
+	margin-bottom: 25px;
+	height: 45px;
+	margin-left: 30px;
+	margin-right: 50px;
+	border: 2px solid #dddddd;
+	padding-left: 20px;
+	font-size: 15px;
+	position: relative;
+	top: -18px;
+}
+
+form>div>img{
+	width: 200px;
+	height: 48px;
+}
+
+button{
+	width: 480px;
+	height: 50px;
+	border-radius: 5px;
+	background-color: #4aaf51;
+	margin-left: 30px;
+	border: 0;
+	font-size: 17px;
+	color: white;
+	letter-spacing: 5px;
+	margin-bottom: 40px;
+}
+
+button:hover{
+	cursor: pointer;
+}
+
