@@ -4,6 +4,7 @@ import com.ujn.library.dao.BookMapper;
 import com.ujn.library.dao.BorrowingRecordMapper;
 import com.ujn.library.dao.UserMapper;
 import com.ujn.library.entity.Book;
+import com.ujn.library.entity.BorrowBook;
 import com.ujn.library.entity.BorrowingRecord;
 import com.ujn.library.service.BorrowingRecordService;
 import com.ujn.library.util.BorrowLogger;
@@ -88,6 +89,20 @@ public class BorrowingRecordServiceImpl implements BorrowingRecordService {
             books.add(book);
         }
         return books;
+    }
+
+    @Override
+    public List<BorrowBook> getBorrHistory(String curr, String limit, String user_id) throws Exception {
+        int index = Integer.valueOf(curr);
+        int pageSize = Integer.valueOf(limit);
+        int start = (index - 1) * pageSize;
+        List<BorrowBook> borrHistoryBooks = borrowingRecordMapper.getBorrHistory(start, pageSize, user_id);
+        return borrHistoryBooks;
+    }
+
+    @Override
+    public int countAll(String user_id) throws Exception {
+        return borrowingRecordMapper.countAll(user_id);
     }
 }
 

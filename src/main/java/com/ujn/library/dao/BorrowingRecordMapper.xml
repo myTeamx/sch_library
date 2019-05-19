@@ -18,6 +18,14 @@
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
   </resultMap>
 
+  <resultMap id="BorrowBookResultMap" type="com.ujn.library.entity.BorrowBook" >
+    <result column="book_name" property="bookName" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="category" property="category" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
   <select id="getBookIdsByUserId" parameterType="String" resultType="String">
     select book_id from borrowing_record where user_id=#{user_id} and state=0
   </select>
@@ -49,5 +57,14 @@
     select book_id from borrowing_record where user_id=#{user_id} order by createtime desc limit ${start},${pageSize}
   </select>
 
+  <select id="getBorrHistory" parameterType="String" resultMap="BorrowBookResultMap">
+    select b.book_name book_name,b.author author,b.category category,br.state state,br.createtime createtime from
+      (select br.user_id,br.book_id,br.state,br.createtime from borrowing_record br where user_id=#{user_id} limit ${start},${pageSize}) br
+    left join book b on br.book_id=b.id order by br.createtime desc
+  </select>
+
+  <select id="countAll" parameterType="String" resultType="Integer">
+    select count(*) from borrowing_record where user_id=#{user_id}
+  </select>
 
 </mapper>

@@ -1,6 +1,7 @@
 package com.ujn.library.dao;
 
 import com.ujn.library.entity.Book;
+import com.ujn.library.entity.BorrowBook;
 import com.ujn.library.entity.BorrowingRecord;
 import org.apache.ibatis.annotations.Param;
 
@@ -28,5 +29,17 @@ public interface BorrowingRecordMapper {
      * @throws Exception
      */
     List<String> getBorrowBookIds(@Param("start") int start, @Param("pageSize") int pageSize, @Param("user_id") String user_id) throws Exception;
+
+    /**
+     * 获得某个人的借阅历史
+     * @param start
+     * @param pageSize
+     * @param user_id
+     * @return
+     * @throws Exception
+     */
+    List<BorrowBook> getBorrHistory(@Param("start") int start, @Param("pageSize") int pageSize, @Param("user_id") String user_id) throws Exception;
+
+    int countAll(String user_id) throws Exception;
 
 }

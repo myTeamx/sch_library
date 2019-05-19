@@ -1,6 +1,7 @@
 package com.ujn.library.service;
 
 import com.ujn.library.entity.Book;
+import com.ujn.library.entity.BorrowBook;
 
 import java.util.List;
 
@@ -27,6 +28,8 @@ public interface BorrowingRecordService {
      */
     List<Book> getBorrowBooks(String curr, String limit, String username) throws Exception;
 
+    List<BorrowBook> getBorrHistory(String curr, String limit, String user_id) throws Exception;
 
+    int countAll(String user_id) throws Exception;
 
 }

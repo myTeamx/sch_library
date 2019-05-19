@@ -1,7 +1,9 @@
 package com.ujn.library.controller;
 
 import com.ujn.library.entity.Book;
+import com.ujn.library.entity.BorrowBook;
 import com.ujn.library.service.BorrowingRecordService;
+import com.ujn.library.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,9 @@ public class BorrowingController {
 
     @Resource
     private BorrowingRecordService borrowingRecordService;
+
+    @Resource
+    private UserService userService;
 
     @ResponseBody
     @PostMapping(value = "/getBookIdsByUserName.action")
@@ -65,5 +70,18 @@ public class BorrowingController {
         return borrowingRecordService.getBorrowBooks(curr, limit, username);
     }
 
+    @ResponseBody
+    @PostMapping(value = "/getBorrHistory.action")
+    public List<BorrowBook> getBorrHistory(String curr, String limit, String username) throws Exception {
+        String user_id = userService.getUserIdByName(username);
+        return borrowingRecordService.getBorrHistory(curr, limit, user_id);
+    }
+
+    @ResponseBody
+    @PostMapping(value = "/countAll.action")
+    public int countAll(String username) throws Exception {
+        String user_id = userService.getUserIdByName(username);
+        return borrowingRecordService.countAll(user_id);
+    }
 
 }
