@@ -52,10 +52,13 @@
                 data: obj,
                 success: function (books) {
                     $.each(books, function (inex, book) {
+                        var stateStr = "";
+                        if (book.state == 0) stateStr = "借阅";
+                        else stateStr = "归还";
                         str += "<li class='layui-timeline-item  layui-anim layui-anim-upbit'>" +
                             "<i class='layui-icon layui-timeline-axis'>&#xe63f;</i>" +
                             "<div class='layui-timeline-content layui-text'>" +
-                            "<h3 class='layui-timeline-title'>"+book.createtime+"</h3>" +
+                            "<h3 class='layui-timeline-title'>"+book.createtime+"("+stateStr+")</h3>" +
                             "<p>" +
                             book.bookName +
                             "<br>" + book.author +
