@@ -59,7 +59,7 @@
 
   <select id="getBorrHistory" parameterType="String" resultMap="BorrowBookResultMap">
     select b.book_name book_name,b.author author,b.category category,br.state state,br.createtime createtime from
-      (select br.user_id,br.book_id,br.state,br.createtime from borrowing_record br where user_id=#{user_id} limit ${start},${pageSize}) br
+      (select br.user_id,br.book_id,br.state,br.createtime from borrowing_record br where user_id=#{user_id} order by br.createtime desc limit ${start},${pageSize}) br
     left join book b on br.book_id=b.id order by br.createtime desc
   </select>
 
